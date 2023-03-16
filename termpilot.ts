@@ -1,26 +1,20 @@
 #!/usr/bin/env -S deno run -A
 
 import { OpenAI } from 'https://deno.land/x/openai_deno/mod.ts'
-
 import inquirer from 'npm:inquirer';
-
 import input from 'npm:@inquirer/input';
 import select from 'npm:@inquirer/select';
 
 // load .env for the token env var
 import "https://deno.land/std@0.179.0/dotenv/load.ts";
 
-
-import os from "https://deno.land/x/dos@v0.11.0/mod.ts";
-
 const answer = await input({ message: '' });
 
 const openai = new OpenAI() 
-
 const completion = await openai.createCompletion(
   'text-davinci-003',
   {
-    prompt: `Some shell command to ${answer}} on ${os.platform()} are:`,
+    prompt: `Some shell command to ${answer}} on ${Deno.build.os} are:`,
     temperature: parseFloat(Deno.env.get("OPENAI_COMPLETION_TEMPERATURE") || "0.4"),
     frequencyPenalty: parseFloat(Deno.env.get("OPENAI_COMPLETION_FREQUENCY_PENALTY") || "0.2"),
     presencePenalty:  parseFloat(Deno.env.get("OPENAI_COMPLETION_PRESENCE_PENALTY") || "0"),
