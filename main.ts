@@ -18,7 +18,7 @@ const openai = new OpenAI()
 const completion = await openai.createCompletion(
   'text-davinci-003',
   {
-    prompt: `The shell command to ${answer}} on ${os.platform()} is:`,
+    prompt: `Some shell command to ${answer}} on ${os.platform()} are:`,
     temperature: 0.4,
     frequencyPenalty: 0.2,
     presencePenalty: 0,
@@ -33,6 +33,13 @@ for (const choice of completion.choices) {
     let split = choice.text.split(/\n+/)
     // remove empty strings
     split = split.filter((s) => s.length > 0)
+
+    // remove any numbers followed by a period from the beginning
+    split = split.map((s) => s.replace(/^\d+\.\s*/, ''))
+
+    // remove any spaces from the beginning
+    split = split.map((s) => s.replace(/^\s+/, ''))    
+
     options.push(...split)
 }
 const choices = options.map((value) => ({"value": value}))
