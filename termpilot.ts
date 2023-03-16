@@ -1,3 +1,5 @@
+#!/usr/bin/env -S deno run -A
+
 import { OpenAI } from 'https://deno.land/x/openai_deno/mod.ts'
 
 import inquirer from 'npm:inquirer';
@@ -19,11 +21,11 @@ const completion = await openai.createCompletion(
   'text-davinci-003',
   {
     prompt: `Some shell command to ${answer}} on ${os.platform()} are:`,
-    temperature: 0.4,
-    frequencyPenalty: 0.2,
-    presencePenalty: 0,
-    maxTokens: 150,
-    bestOf: 3,
+    temperature: parseFloat(Deno.env.get("OPENAI_COMPLETION_TEMPERATURE") || "0.4"),
+    frequencyPenalty: parseFloat(Deno.env.get("OPENAI_COMPLETION_FREQUENCY_PENALTY") || "0.2"),
+    presencePenalty:  parseFloat(Deno.env.get("OPENAI_COMPLETION_PRESENCE_PENALTY") || "0"),
+    maxTokens: parseInt(Deno.env.get("OPENAI_COMPLETION_MAX_TOKENS") || "150"),
+    bestOf: parseInt(Deno.env.get("OPENAI_COMPLETION_BEST_OF") || "1"),
   }
 )
 
@@ -48,5 +50,9 @@ const res = await select({
   message: 'Select a command from the list below:',
   choices: choices
 });
-const tmpFile = Deno.args[0]
+
+const tmpFile = Deno.args[0];
+if (!tmpFile) {
+  throw Error("please specify a temporary file to use for the selected command")
+}
 Deno.writeFileSync(tmpFile, new TextEncoder().encode(res))
