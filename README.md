@@ -8,16 +8,19 @@ TermPilot uses OpenAI GPT-3 to find the terminal command you're looking for, jus
 2. Copy termpilot.ts into your path somewhere (eg I use ~/bin which is in my path)
 3. Source the shell script from your rc file or just copy it: tp.zsh 
 4. Signup for OpenAI API access, then export OPENAI_API_TOKEN environment with your secret/token.
-5. Review the license and remember that you're expected to double check the command provide doesn't break anything.
+5. Review the license and remember that you're expected to double check the command provided doesn't break anything.
 
 ## Usage
 
-1. Currently the shell script sets up ^\ (CTRL + \) as the key binding for start termpilot. Once you've installed.
-2. Once the prompt is up just enter what you'd like to clear concise english (other languages might work?)
+1. Currently the shell script sets up ^\ (CTRL + \\) as the key binding for start termpilot.
+2. Once the prompt is up, just enter what you'd like to accomplish in clear concise english (other languages might work?)
 3. Select the command that best matches what you're looking to do.
-4. Hit enter to run the command once you've tweaked and (and assuming you think it's safe!)
+4. Hit enter to run the command once you've tweaked it (and assuming you think it's safe!)
 
 ## CUSTOMIZATION
+
+Check the source, all the API parameters sent to OpenAI API are environment variables with defaults.
+
 
 ## Contributing
 
