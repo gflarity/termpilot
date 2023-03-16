@@ -42,6 +42,7 @@ I'm definitely looking to build a community and merge contributions. See the ROA
 ### Medium Term
 
 * Having a separate command that generates howtos and displays them in a separate tmux pane or something like that
+
 ### Long Term
 
-* local models so you don't have to pay for OpenAI api. Maybe LLAMA or a LLAMA derrivative can be used? 
+* local models so you don't have to pay for OpenAI API. Maybe LLAMA or a LLAMA derivative can be used? 
